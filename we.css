@@ -49,3 +49,130 @@ nav button {
 nav button:hover {
     background-color: #45a049;
 }
+
+
+.SecFirst{
+    padding: 20px;
+}
+
+.Zagalovok{
+    color: #4CAF50;
+    display: flex;
+    justify-content: center;
+}
+
+.Zagalovok:hover{
+    color: aqua;
+}
+
+h2{
+    color: #4CAF50;
+}
+
+h2:hover{
+    color: aqua;
+}
+
+.ThreePers{
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+}
+
+
+.FirstPers{
+    background-color: #2d2d2d;
+    width: 350px;
+    border-radius: 8px;
+    border: 2px solid #4CAF50;
+}
+
+.FirstPers:hover{
+     background-color: #2d2d2d;
+    width: 350px;
+    border-radius: 8px;
+    border: 2px solid #00d0ff;
+}
+
+
+.FirstPers h2{
+    position: relative;
+    margin-left: 125px;
+}
+
+
+
+.SecondPers{
+    background-color: #2d2d2d;
+    width: 350px;
+    border-radius: 8px;
+    border: 2px solid #4CAF50;
+}
+
+
+.SecondPers:hover{
+    background-color: #2d2d2d;
+    width: 350px;
+    border-radius: 8px;
+    border: 2px solid #00d0ff;
+}
+
+.SecondPers h2{
+    position: relative;
+    margin-left: 125px;
+}
+
+
+.SecondPers p{
+    position: relative;
+    margin-left: 30px;
+}
+
+.ThirdPers{
+    background-color: #2d2d2d;
+    width: 350px;
+    border-radius: 8px;
+    border: 2px solid #4CAF50;
+}
+
+.ThirdPers:hover{
+    background-color: #2d2d2d;
+    width: 350px;
+    border-radius: 8px;
+    border: 2px solid #00d0ff;
+}
+
+
+.ThirdPers h2{
+    position: relative;
+    margin-left: 125px;
+}
+
+.ThirdPers p {
+    position: relative;
+    margin-left: 50px;
+}
+
+.SecondSec{
+    position: absolute;
+    margin-left: 130px;
+    background-color: #2d2d2d;
+    border-radius: 8px;
+    border: 2px solid #4CAF50;
+    width: 1200px;
+    padding: 30px;
+}
+
+.SecondSec:hover{
+    border: 2px solid #00d0ff;
+}
+
+.SecondSec h1{
+   display: flex;
+   justify-content: center;
+   color: #4CAF50;
+}
+
+.SecondSec h1:hover{
+    color: #00d0ff;
+}
