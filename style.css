@@ -1,0 +1,160 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #2d2d2d;
+    padding: 20px;
+    border-bottom: 3px solid #4CAF50;
+}
+
+header img {
+    height: 40px;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+header h1 {
+    display: inline-block;
+    color: #4CAF50;
+    margin: 0;
+    font-size: 24px;
+}
+
+nav {
+    float: right;
+    margin-top: 5px;
+}
+
+nav a {
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+nav button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+nav button:hover {
+    background-color: #45a049;
+}
+
+
+main {
+    padding: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+section {
+    background-color: #2d2d2d;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 8px;
+    border-left: 5px solid #4CAF50;
+}
+
+section h1 {
+    color: #4CAF50;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+section h2 {
+    color: #4CAF50;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #3d3d3d;
+    border-radius: 4px;
+}
+
+strong {
+    color: #4CAF50;
+}
+
+article {
+    background-color: #2d2d2d;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    border: 1px solid #4CAF50;
+}
+
+article iframe {
+    width: 100%;
+    max-width: 720px;
+    height: 405px;
+    border-radius: 4px;
+}
+
+article p {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #4CAF50;
+    text-align: center;
+}
+
+.card {
+    background-color: #2d2d2d;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 8px;
+    border: 2px solid #4CAF50;
+    text-align: center;
+    display: inline-block;
+    width: 250px;
+    vertical-align: top;
+}
+
+.card h2 {
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #cccccc;
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #1a1a1a;
+    padding: 20px;
+    text-align: center;
+    border-top: 2px solid #4CAF50;
+    margin-top: 40px;
+}
+
+footer nav {
+    float: none;
+}
+
+footer a {
+    color: #888888;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+footer a:hover {
+    color: #4CAF50;
+}
