@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
@@ -51,17 +52,39 @@ export default function Price() {
     }
   ];
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-slideInUp');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const cards = document.querySelectorAll('.product-card-animate');
+    cards.forEach((card) => observer.observe(card));
+
+    return () => {
+      cards.forEach((card) => observer.unobserve(card));
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#1a1a1a] text-white">
       <Header />
-      <main className="p-8 max-w-[1200px] mx-auto">
-        <section className="bg-[#2d2d2d] p-6 rounded-lg border-l-[5px] border-[#4CAF50] mb-8">
-          <h1 className="text-[#4CAF50] text-3xl">Список предоставляемых услуг</h1>
+      <main className="p-4 sm:p-8 max-w-[1200px] mx-auto">
+        <section className="bg-[#2d2d2d] p-4 sm:p-6 rounded-lg border-l-[5px] border-[#4CAF50] mb-6 sm:mb-8 animate-fadeIn">
+          <h1 className="text-[#4CAF50] text-2xl sm:text-3xl">Список предоставляемых услуг</h1>
         </section>
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 py-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 sm:gap-8 py-4 sm:py-8">
           {products.map((product, index) => (
-            <ProductCard key={index} {...product} />
+            <div key={index} className="product-card-animate" style={{ animationDelay: `${index * 0.1}s` }}>
+              <ProductCard {...product} />
+            </div>
           ))}
         </div>
       </main>

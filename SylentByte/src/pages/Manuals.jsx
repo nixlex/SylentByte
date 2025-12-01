@@ -5,13 +5,13 @@ export default function Manuals() {
   return (
     <div className="min-h-screen bg-[#1a1a1a] text-white">
       <Header />
-      <main className="p-8 max-w-[1000px] mx-auto">
-        <section className="bg-[#2d2d2d] p-6 rounded-lg border-l-[5px] border-[#4CAF50] mb-8">
-          <h1 className="text-[#4CAF50] text-3xl mb-4">Обучающие материалы</h1>
-          <p className="text-[#cccccc]">Изучайте кибербезопасность с нашими мануалами</p>
+      <main className="p-4 sm:p-8 max-w-[1000px] mx-auto">
+        <section className="bg-[#2d2d2d] p-4 sm:p-6 rounded-lg border-l-[5px] border-[#4CAF50] mb-6 sm:mb-8 animate-fadeIn">
+          <h1 className="text-[#4CAF50] text-2xl sm:text-3xl mb-3 sm:mb-4">Обучающие материалы</h1>
+          <p className="text-[#cccccc] text-sm sm:text-base">Изучайте кибербезопасность с нашими мануалами</p>
         </section>
 
-        <article className="bg-[#2d2d2d] p-5 rounded-lg border border-[#4CAF50] mb-5">
+        <article className="bg-[#2d2d2d] p-4 sm:p-5 rounded-lg border border-[#4CAF50] mb-4 sm:mb-5 animate-slideInUp hover:border-cyan-400 transition-all duration-300">
           <iframe
             width="720"
             height="405"

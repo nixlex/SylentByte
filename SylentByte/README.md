@@ -1,16 +1,124 @@
-# React + Vite
+# SylentByte - Веб-приложение
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Полнофункциональное веб-приложение с React, Tailwind CSS, картами, дэшбордом и бэкендом.
 
-Currently, two official plugins are available:
+## Технологии
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Frontend
+- React 19
+- Tailwind CSS 4
+- React Router DOM
+- Chart.js (графики)
+- GSAP (анимации)
+- Leaflet (карты)
 
-## React Compiler
+### Backend
+- Express.js
+- SQLite
+- JWT авторизация
+- bcryptjs
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Установка и запуск
 
-## Expanding the ESLint configuration
+### Frontend
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+cd SylentByte
+npm install
+npm run dev
+```
+
+Приложение будет доступно на `http://localhost:5173`
+
+### Backend
+
+```bash
+cd SylentByte/web-application/backend
+npm install
+npm start
+```
+
+Сервер будет доступен на `http://localhost:3000`
+
+## Функционал
+
+### ✅ Реализовано
+
+1. **Адаптивный дизайн (Mobile First)**
+   - Поддержка экранов от 320px до 1920px+
+   - Flexbox и Grid Layout
+   - Адаптивная навигация с мобильным меню
+
+2. **Геолокация и карты**
+   - Интеграция Yandex Maps
+   - Отображение маркеров офисов
+   - Определение местоположения пользователя
+   - Popup с информацией по клику на маркер
+
+3. **Личный кабинет / Дэшборд**
+   - Авторизация через JWT
+   - Статистика в виде графиков (Chart.js):
+     - Линейный график динамики доходов
+     - Круговая диаграмма распределения проектов
+     - Столбчатая диаграмма по типам проектов
+   - Таблицы с данными проектов
+   - Фильтрация по статусу
+   - Сортировка по дате, проекту, сумме
+
+4. **CSS-анимации**
+   - @keyframes: fadeIn, slideDown, slideInUp, spin, bounce
+   - Transitions на всех интерактивных элементах
+   - Hover эффекты с масштабированием и тенями
+   - Анимация загрузки (loader)
+
+5. **JavaScript-анимации**
+   - GSAP для плавной прокрутки
+   - Карусель с анимацией перехода
+   - Intersection Observer для анимации при скролле
+   - Плавные переходы между слайдами
+
+6. **MVP Backend**
+   - Express.js сервер
+   - SQLite база данных
+   - JWT авторизация
+   - RESTful API
+   - CRUD операции для проектов
+
+## Тестовый пользователь
+
+Для тестирования создайте пользователя через `/api/register` или используйте существующего в базе данных.
+
+**Важно:** Пароли теперь хешируются с помощью bcryptjs. Для первого запуска можно зарегистрировать нового пользователя через API.
+
+## Структура проекта
+
+```
+SylentByte/
+├── src/
+│   ├── components/     # Переиспользуемые компоненты
+│   ├── pages/          # Страницы приложения
+│   ├── utils/          # Утилиты
+│   └── App.jsx         # Главный компонент
+├── web-application/
+│   └── backend/        # Backend API
+│       ├── server.js    # Express сервер
+│       ├── database.js  # Класс для работы с БД
+│       └── database.db  # SQLite база данных
+└── public/             # Статические файлы
+```
+
+## API Endpoints
+
+- `POST /api/register` - Регистрация пользователя
+- `POST /api/login` - Авторизация (возвращает JWT токен)
+- `GET /api/dashboard/data` - Данные для дэшборда (требует авторизации, заголовок: `Authorization: Bearer <token>`)
+- `GET /api/products` - Получение всех товаров
+- `GET /api/shops` - Получение всех магазинов
+
+## Особенности реализации
+
+- **Mobile First подход**: Дизайн сначала для мобильных устройств
+- **Адаптивная сетка**: Grid с `auto-fit` и `minmax` для карточек
+- **Анимации**: Комбинация CSS и JavaScript анимаций
+- **Безопасность**: Хеширование паролей, JWT токены
+- **UX**: Плавные переходы, индикаторы загрузки, обратная связь

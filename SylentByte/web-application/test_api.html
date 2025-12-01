@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестирование API</title>
+</head>
+<body>
+<h1>Тестирование API</h1>
+
+<div id="response"></div>
+
+<hr>
+
+<h1>Авторизация</h1>
+
+<h3>Регистрация</h3>
+<form id="registerForm">
+    <input type="text" id="regName" placeholder="Имя" required>
+    <input type="email" id="regEmail" placeholder="Email" required>
+    <input type="password" id="regPassword" placeholder="Пароль" required>
+    <button type="submit">Зарегистрироваться</button>
+</form>
+
+<h3>Вход</h3>
+<form id="loginForm">
+    <input type="email" id="loginEmail" placeholder="Email" required>
+    <input type="password" id="loginPassword" placeholder="Пароль" required>
+    <button type="submit">Войти</button>
+</form>
+
+<hr>
+
+<h1>Товары</h1>
+
+<button onclick="getAllProducts()">Получить все товары</button>
+
+<h3>Получить товар по ID</h3>
+<form id="getProductForm">
+    <input type="number" id="productId" placeholder="ID товара" required>
+    <button type="submit">Получить товар</button>
+</form>
+
+<div id="productDisplay"></div>
+
+<hr>
+
+<h1>Создание</h1>
+
+<h3>Создать товар</h3>
+<form id="createProductForm">
+    <input type="text" id="productName" placeholder="Название товара" required>
+    <input type="number" id="productPrice" placeholder="Цена" step="0.01" required>
+    <textarea id="productDescription" placeholder="Описание товара"></textarea>
+    <input type="text" id="productImage" placeholder="URL images/image.jpg">
+    <input type="text" id="productCategory" placeholder="Категория">
+    <button type="submit">Создать товар</button>
+</form>
+
+<hr>
+
+<h1>Отзывы</h1>
+
+<h3>Получить отзывы товара</h3>
+<form id="getProductReviewsForm">
+    <input type="number" id="productReviewsId" placeholder="ID товара" required>
+    <button type="submit">Получить отзывы</button>
+</form>
+
+<h3>Получить отзывы пользователя</h3>
+<form id="getUserReviewsForm">
+    <input type="number" id="userReviewsId" placeholder="ID пользователя" required>
+    <button type="submit">Получить отзывы</button>
+</form>
+
+<h3>Оставить отзыв</h3>
+<form id="createReviewForm">
+    <input type="number" id="reviewUserId" placeholder="ID пользователя" required>
+    <input type="number" id="reviewProductId" placeholder="ID товара" required>
+    <textarea id="reviewText" placeholder="Текст отзыва" required></textarea>
+    <input type="number" id="reviewStars" placeholder="Оценка (1-5)" min="1" max="5" required>
+    <button type="submit">Оставить отзыв</button>
+</form>
+
+<hr>
+
+<h1>Магазины</h1>
+
+<h3>Создать магазин</h3>
+<form id="createShopForm">
+    <input type="text" id="shopAddress" placeholder="Адрес магазина" required>
+    <input type="text" id="shopPhone" placeholder="Телефон">
+    <input type="number" id="shopLatitude" placeholder="Широта" step="0.000001">
+    <input type="number" id="shopLongitude" placeholder="Долгота" step="0.000001">
+    <button type="submit">Создать магазин</button>
+</form>
+
+<button onclick="getAllShops()">Получить все магазины</button>
+
+<script>
+    const API_BASE = 'http://localhost:3000/api';
+    const responseDiv = document.getElementById('response');
+    const productDisplay = document.getElementById('productDisplay');
+
+    // Функция для отображения ответа
+    function showResponse(data) {
+        responseDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+    }
+
+    // Функция для отображения товара с изображением
+    function displayProduct(product) {
+        let imageHtml = '';
+        if (product.image_url) {
+            imageHtml = `
+                    <div>
+                        <img src="${product.image_url}" alt="${product.name}" class="product-image"
+                             onerror="this.style.display='none'">
+                    </div>
+                `;
+        }
+
+        productDisplay.innerHTML = `
+                <div class="product-card">
+                    <h3>${product.name}</h3>
+                    ${imageHtml}
+                    <div class="product-info">
+                        <div class="product-price">$${product.price}</div>
+                        <div>${product.description || 'Описание отсутствует'}</div>
+                        <div class="product-category">${product.category || 'Без категории'}</div>
+                        <div><small>ID: ${product.id} | Создан: ${new Date(product.created_at).toLocaleDateString()}</small></div>
+                    </div>
+                </div>
+            `;
+    }
+
+    // Функция для обработки ошибок
+    function handleError(error) {
+        responseDiv.innerHTML = `<pre style="color: red;">Ошибка: ${error}</pre>`;
+        productDisplay.innerHTML = '';
+    }
+
+    // Авторизация
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = {
+            name: document.getElementById('regName').value,
+            email: document.getElementById('regEmail').value,
+            password: document.getElementById('regPassword').value
+        };
+
+        try {
+            const response = await fetch(`${API_BASE}/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            showResponse(data);
+        } catch (error) {
+            handleError(error);
+        }
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = {
+            email: document.getElementById('loginEmail').value,
+            password: document.getElementById('loginPassword').value
+        };
+
+        try {
+            const response = await fetch(`${API_BASE}/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            showResponse(data);
+        } catch (error) {
+            handleError(error);
+        }
+    });
+
+    // Товары
+    async function getAllProducts() {
+        try {
+            const response = await fetch(`${API_BASE}/products`);
+            const data = await response.json();
+            showResponse(data);
+            productDisplay.innerHTML = ''; // Очищаем отображение товара
+        } catch (error) {
+            handleError(error);
+        }
+    }
+
+    document.getElementById('getProductForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const productId = document.getElementById('productId').value;
+
+        try {
+            const response = await fetch(`${API_BASE}/products/${productId}`);
+            const data = await response.json();
+
+            if (data.success && data.data) {
+                displayProduct(data.data);
+                showResponse(data); // Показываем JSON ответ тоже
+            } else {
+                showResponse(data);
+                productDisplay.innerHTML = '<p style="color: red;">Товар не найден</p>';
+            }
+        } catch (error) {
+            handleError(error);
+        }
+    });
+
+    // Отзывы
+    document.getElementById('getProductReviewsForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const productId = document.getElementById('productReviewsId').value;
+
+        try {
+            const response = await fetch(`${API_BASE}/products/${productId}/reviews`);
+            const data = await response.json();
+            showResponse(data);
+            productDisplay.innerHTML = ''; // Очищаем отображение товара
+        } catch (error) {
+            handleError(error);
+        }
+    });
+
+    document.getElementById('getUserReviewsForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const userId = document.getElementById('userReviewsId').value;
+
+        try {
+            const response = await fetch(`${API_BASE}/users/${userId}/reviews`);
+            const data = await response.json();
+            showResponse(data);
+            productDisplay.innerHTML = '';
+        } catch (error) {
+            handleError(error);
+        }
+    });
+
+    document.getElementById('createReviewForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = {
+            user_id: document.getElementById('reviewUserId').value,
+            product_id: document.getElementById('reviewProductId').value,
+            review: document.getElementById('reviewText').value,
+            stars: document.getElementById('reviewStars').value
+        };
+
+        try {
+            const response = await fetch(`${API_BASE}/reviews`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            showResponse(data);
+            productDisplay.innerHTML = '';
+        } catch (error) {
+            handleError(error);
+        }
+    });
+
+    // Магазины
+    async function getAllShops() {
+        try {
+            const response = await fetch(`${API_BASE}/shops`);
+            const data = await response.json();
+            showResponse(data);
+            productDisplay.innerHTML = '';
+        } catch (error) {
+            handleError(error);
+        }
+    }
+
+    // Создание
+    document.getElementById('createProductForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = {
+            name: document.getElementById('productName').value,
+            price: document.getElementById('productPrice').value,
+            description: document.getElementById('productDescription').value,
+            image_url: document.getElementById('productImage').value,
+            category: document.getElementById('productCategory').value
+        };
+
+        try {
+            const response = await fetch(`${API_BASE}/products`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            showResponse(data);
+            productDisplay.innerHTML = '';
+        } catch (error) {
+            handleError(error);
+        }
+    });
+
+    document.getElementById('createShopForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = {
+            address: document.getElementById('shopAddress').value,
+            phone: document.getElementById('shopPhone').value,
+            latitude: document.getElementById('shopLatitude').value,
+            longitude: document.getElementById('shopLongitude').value
+        };
+
+        try {
+            const response = await fetch(`${API_BASE}/shops`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            showResponse(data);
+            productDisplay.innerHTML = '';
+        } catch (error) {
+            handleError(error);
+        }
+    });
+
+    // Загружаем информацию об API при загрузке страницы
+    window.addEventListener('load', async () => {
+        try {
+            const response = await fetch('http://localhost:3000/');
+            const data = await response.json();
+            showResponse(data);
+        } catch (error) {
+            handleError('Сервер не запущен. Запустите server.js сначала.');
+        }
+    });
+</script>
+</body>
+</html>

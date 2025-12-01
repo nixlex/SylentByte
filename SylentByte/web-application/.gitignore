@@ -1,0 +1,25 @@
+# Зависимости
+node_modules/
+
+# Файлы окружения
+.env
+.env.local
+
+# Логи
+*.log
+npm-debug.log*
+
+# Файлы IDE
+.vscode/
+.idea/
+.gigaide/
+*.swp
+*.swo
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# База данных
+*.db
+*.sqlite

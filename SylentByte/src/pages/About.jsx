@@ -5,13 +5,13 @@ export default function About() {
   return (
     <div className="min-h-screen bg-[#1a1a1a] text-white">
       <Header />
-      <main className="p-8">
-        <section className="p-5 mb-8">
-          <h1 className="text-[#4CAF50] text-3xl text-center mb-8 hover:text-cyan-400 transition">
+      <main className="p-4 sm:p-8">
+        <section className="p-4 sm:p-5 mb-6 sm:mb-8">
+          <h1 className="text-[#4CAF50] text-2xl sm:text-3xl text-center mb-6 sm:mb-8 hover:text-cyan-400 transition animate-fadeIn">
             Коротко о нас
           </h1>
-          <div className="flex justify-around flex-wrap gap-8 p-12">
-            <article className="bg-[#2d2d2d] w-[350px] rounded-lg border-2 border-[#4CAF50] p-5 hover:border-cyan-400 transition">
+          <div className="flex justify-center sm:justify-around flex-wrap gap-4 sm:gap-8 p-4 sm:p-12">
+            <article className="bg-[#2d2d2d] w-full sm:w-[350px] rounded-lg border-2 border-[#4CAF50] p-4 sm:p-5 hover:border-cyan-400 transition-all duration-300 hover:scale-105 animate-slideInUp">
               <h2 className="text-[#4CAF50] text-xl mb-3 text-center hover:text-cyan-400 transition">
                 Frontex
               </h2>
@@ -21,7 +21,7 @@ export default function About() {
                 на утечку информации из баз данных.
               </p>
             </article>
-            <article className="bg-[#2d2d2d] w-[350px] rounded-lg border-2 border-[#4CAF50] p-5 hover:border-cyan-400 transition">
+            <article className="bg-[#2d2d2d] w-full sm:w-[350px] rounded-lg border-2 border-[#4CAF50] p-4 sm:p-5 hover:border-cyan-400 transition-all duration-300 hover:scale-105 animate-slideInUp">
               <h2 className="text-[#4CAF50] text-xl mb-3 text-center hover:text-cyan-400 transition">
                 il061-rgb
               </h2>
@@ -31,7 +31,7 @@ export default function About() {
                 бухгалтерский учёт для финансов.
               </p>
             </article>
-            <article className="bg-[#2d2d2d] w-[350px] rounded-lg border-2 border-[#4CAF50] p-5 hover:border-cyan-400 transition">
+            <article className="bg-[#2d2d2d] w-full sm:w-[350px] rounded-lg border-2 border-[#4CAF50] p-4 sm:p-5 hover:border-cyan-400 transition-all duration-300 hover:scale-105 animate-slideInUp">
               <h2 className="text-[#4CAF50] text-xl mb-3 text-center hover:text-cyan-400 transition">
                 izzkide
               </h2>
@@ -44,11 +44,11 @@ export default function About() {
         </section>
 
         <section className="flex justify-center">
-          <div className="bg-[#2d2d2d] rounded-lg border-2 border-[#4CAF50] w-full max-w-[1200px] p-8 hover:border-cyan-400 transition">
+          <div className="bg-[#2d2d2d] rounded-lg border-2 border-[#4CAF50] w-full max-w-[1200px] p-4 sm:p-8 hover:border-cyan-400 transition-all duration-300 animate-slideInUp">
             <h1 className="flex justify-center text-[#4CAF50] text-3xl mb-6 hover:text-cyan-400 transition">
               О нашей команде
             </h1>
-            <p className="text-[#cccccc] leading-relaxed">
+            <p className="text-[#cccccc] leading-relaxed text-sm sm:text-base">
               Наша команда — это сплочённая группа высококлассных специалистов, объединяющая экспертизу в области веб-разработки и кибербезопасности. Мы создаём современные, функциональные и, что самое главное, безопасные цифровые продукты для наших клиентов.
               <br /><br />
               Наш ключевой принцип — синергия. Мы не просто выполняем задачи, а комплексно подходим к каждому проекту:
